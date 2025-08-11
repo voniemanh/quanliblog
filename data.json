@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "nickname": "alice",
+      "password": "alice123",
+      "email": "alice@example.com",
+      "isAdmin": true
+    },
+    {
+      "id": "2",
+      "nickname": "bob",
+      "password": "bobpass",
+      "email": "bob@example.com",
+      "isAdmin": false
+    },
+    {
+      "id": "3",
+      "nickname": "charlie",
+      "password": "charlie2025",
+      "email": "charlie@example.com",
+      "isAdmin": false
+    }
+  ],
+  "posts": [
+    {
+      "title": "Welcome to My Blog",
+      "content": "<p><em><span class=\"ql-cursor\">﻿</span>Welcome everyone! This is the very first post on my personal blog. I created this space to share my thoughts, experiences, and ideas about technology, books, and life in general.</em></p><p><em>Over the next few weeks, I’ll be posting tutorials, reviews, and personal reflections on different topics that I find interesting. I hope that through this blog, we can start meaningful conversations and exchange ideas that can benefit all of us.</em></p><p><em>lorem</em></p>",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "title": "Admin Only Thoughts",
+      "content": "<p>This post is restricted to admin users only. In this space, I’ll be sharing my behind-the-scenes thoughts on managing the blog, strategies for content creation, and insights on how to grow our community.</p><p>Since this is a private post, please keep the information here confidential. It will include draft ideas, potential collaborations, and plans for upcoming features.</p>",
+      "author": "alice",
+      "isPrivate": true,
+      "category": "Admin Notes",
+      "tags": [
+        "admin",
+        "strategy",
+        "content-creation",
+        "planning"
+      ],
+      "datePost": "2025-08-05T10:00:00Z",
+      "comments": [
+        {
+          "id": 1,
+          "nickname": "alice",
+          "message": "Let's start with a Q&A section to engage readers.",
+          "date": "2025-08-10T10:30:00Z"
+        }
+      ]
+    },
+    {
+      "title": "A Day in My Life as a Developer",
+      "content": "<p>My typical day starts early with a hot cup of coffee and a quick scan through my emails and notifications. After that, I review the to-do list I prepared the night before.</p><p>Most of my morning is dedicated to deep work—coding, fixing bugs, and implementing new features for our projects. Around noon, I take a break for lunch, often using the time to read articles or catch up on tech news. The afternoon is usually for meetings, code reviews, and brainstorming sessions with my team.</p>",
+      "id": "3"
+    }
+  ]
+}
