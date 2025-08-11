@@ -1,26 +1,28 @@
 {
   "users": [
     {
-      "nickname": "alice1",
-      "password": "alice111",
+      "nickname": "alice4234324",
       "email": "alice@example.com",
-      "authorAvatar": "https://picsum.photos/100/100?random=1",
+      "password": "alice2025",
+      "isAdmin": true,
+      "authorAvatar": "https://picsum.photos/100/100?random=4",
       "id": "1"
     },
     {
-      "nickname": "bobby",
-      "password": "bobbypass",
+      "nickname": "bobbby",
       "email": "bob@example.com",
-      "authorAvatar": "https://picsum.photos/100/100?random=2",
+      "password": "bob2025",
+      "isAdmin": false,
+      "authorAvatar": "https://picsum.photos/100/100?random=3",
       "id": "2"
     },
     {
-      "id": "3",
       "nickname": "charlie",
-      "password": "charlie2025",
       "email": "charlie@example.com",
+      "password": "charlie2025",
       "isAdmin": false,
-      "authorAvatar": "https://picsum.photos/100/100?random=3"
+      "authorAvatar": "https://picsum.photos/100/100?random=3",
+      "id": "3"
     }
   ],
   "posts": [
@@ -29,7 +31,7 @@
       "title": "Welcome to My Blog",
       "thumbnail": "https://picsum.photos/800/400?random=11",
       "content": "<p><em>Welcome everyone! This is the very first post on my personal blog. I created this space to share my thoughts, experiences, and ideas about technology, books, and life in general.</em></p><p><em>Over the next few weeks, I’ll be posting tutorials, reviews, and personal reflections on different topics that I find interesting. I hope that through this blog, we can start meaningful conversations and exchange ideas that can benefit all of us.</em></p><p><em>lorem</em></p>",
-      "authorId": "1",
+      "author": "alice4234324",
       "isPrivate": false,
       "category": "Introduction",
       "tags": [
@@ -41,19 +43,19 @@
       "comments": [
         {
           "id": "1",
-          "authorId": "2",
+          "nickname": "bobbby",
           "message": "Chào mừng bạn đến với blog mới này! Mong chờ các bài viết tiếp theo.",
           "date": "2025-08-02T08:45:00Z"
         },
         {
           "id": "2",
-          "authorId": "3",
+          "nickname": "charlie",
           "message": "Bài viết rất hay, mong blog sẽ phát triển mạnh!",
           "date": "2025-08-02T12:15:00Z"
         },
         {
           "id": "1754881258231",
-          "authorId": "1",
+          "nickname": "alice4234324",
           "message": "<p>hey bob</p>",
           "date": "2025-08-11T03:00:58.231Z"
         }
@@ -64,7 +66,7 @@
       "title": "Admin Only Thoughts",
       "thumbnail": "https://picsum.photos/800/400?random=12",
       "content": "<p>This post is restricted to admin users only. In this space, I’ll be sharing my behind-the-scenes thoughts on managing the blog, strategies for content creation, and insights on how to grow our community.</p><p>Since this is a private post, please keep the information here confidential. It will include draft ideas, potential collaborations, and plans for upcoming features.</p>",
-      "authorId": "1",
+      "author": "alice4234324",
       "isPrivate": true,
       "category": "Admin Notes",
       "tags": [
@@ -78,7 +80,7 @@
       "comments": [
         {
           "id": "3",
-          "authorId": "1",
+          "nickname": "alice4234324",
           "message": "Let's start with a Q&A section to engage readers.",
           "date": "2025-08-10T10:30:00Z"
         }
@@ -96,15 +98,17 @@
         "planning"
       ],
       "datePost": "2025-09-05T10:00:00Z",
-      "authorId": "2",
+      "author": "bobbby",
       "comments": [
         {
-          "id": "1754891288070",
-          "authorId": "2",
-          "message": "<p>hey me</p>",
-          "date": "2025-08-11T05:48:08.070Z"
+          "id": "1754910446415",
+          "nickname": "alice4234324",
+          "message": "<p>rdgdfgdfg</p>",
+          "date": "2025-08-11T11:07:26.415Z",
+          "authorAvatar": "https://picsum.photos/100/100?random=4"
         }
-      ]
+      ],
+      "authorAvatar": "https://picsum.photos/100/100?random=3"
     }
   ]
 }
