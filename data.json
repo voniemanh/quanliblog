@@ -21,17 +21,8 @@
       "email": "charlie@example.com",
       "password": "charlie2025",
       "isAdmin": false,
-<<<<<<< HEAD
-      "authorAvatar": "https://picsum.photos/100/100?random=3"
-    },
-    {
-      "id": "4",
-      "nickname": "panda",
-      "password": "papandaa"
-=======
-      "authorAvatar": "https://picsum.photos/100/100?random=3",
-      "id": "3"
->>>>>>> c95a114b8cd3cc33603e3acc57c4ca684d3b87b6
+      "authorAvatar":"https://picsum.photos/100/100?random=3",
+      "id":"3"
     }
   ],
   "posts": [
