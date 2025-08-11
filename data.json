@@ -21,6 +21,11 @@
       "email": "charlie@example.com",
       "isAdmin": false,
       "authorAvatar": "https://picsum.photos/100/100?random=3"
+    },
+    {
+      "id": "4",
+      "nickname": "panda",
+      "password": "papandaa"
     }
   ],
   "posts": [
