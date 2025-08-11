@@ -24,9 +24,28 @@
   ],
   "posts": [
     {
+      "id": "1",
       "title": "Welcome to My Blog",
-      "content": "<p><em><span class=\"ql-cursor\">﻿</span>Welcome everyone! This is the very first post on my personal blog. I created this space to share my thoughts, experiences, and ideas about technology, books, and life in general.</em></p><p><em>Over the next few weeks, I’ll be posting tutorials, reviews, and personal reflections on different topics that I find interesting. I hope that through this blog, we can start meaningful conversations and exchange ideas that can benefit all of us.</em></p><p><em>lorem</em></p>",
-      "id": "1"
+      "content": "<p><em>Welcome everyone! This is the very first post on my personal blog. I created this space to share my thoughts, experiences, and ideas about technology, books, and life in general.</em></p><p><em>Over the next few weeks, I’ll be posting tutorials, reviews, and personal reflections on different topics that I find interesting. I hope that through this blog, we can start meaningful conversations and exchange ideas that can benefit all of us.</em></p><p><em>lorem</em></p>",
+      "author": "alice",
+      "isPrivate": false,
+      "category": "Introduction",
+      "tags": ["welcome", "personal", "first-post"],
+      "datePost": "2025-08-01T10:00:00Z",
+      "comments": [
+        {
+          "id": "1",
+          "nickname": "bob",
+          "message": "Chào mừng bạn đến với blog mới này! Mong chờ các bài viết tiếp theo.",
+          "date": "2025-08-02T08:45:00Z"
+        },
+        {
+          "id": "2",
+          "nickname": "charlie",
+          "message": "Bài viết rất hay, mong blog sẽ phát triển mạnh!",
+          "date": "2025-08-02T12:15:00Z"
+        }
+      ]
     },
     {
       "id": "2",
@@ -35,26 +54,46 @@
       "author": "alice",
       "isPrivate": true,
       "category": "Admin Notes",
-      "tags": [
-        "admin",
-        "strategy",
-        "content-creation",
-        "planning"
-      ],
+      "tags": ["admin", "strategy", "content-creation", "planning", "private"],
       "datePost": "2025-08-05T10:00:00Z",
       "comments": [
         {
-          "id": 1,
+          "id": "3",
           "nickname": "alice",
           "message": "Let's start with a Q&A section to engage readers.",
           "date": "2025-08-10T10:30:00Z"
+        },
+        {
+          "id": "4",
+          "nickname": "alice",
+          "message": "Cần thêm lịch đăng bài cố định hàng tuần.",
+          "date": "2025-08-10T11:00:00Z"
         }
       ]
     },
     {
+      "id": "3",
       "title": "A Day in My Life as a Developer",
       "content": "<p>My typical day starts early with a hot cup of coffee and a quick scan through my emails and notifications. After that, I review the to-do list I prepared the night before.</p><p>Most of my morning is dedicated to deep work—coding, fixing bugs, and implementing new features for our projects. Around noon, I take a break for lunch, often using the time to read articles or catch up on tech news. The afternoon is usually for meetings, code reviews, and brainstorming sessions with my team.</p>",
-      "id": "3"
+      "author": "bob",
+      "isPrivate": false,
+      "category": "Technology",
+      "tags": ["developer-life", "productivity", "coding"],
+      "datePost": "2025-08-08T09:00:00Z",
+      "comments": [
+        {
+          "id": "5",
+          "nickname": "alice",
+          "message": "Lịch làm việc rất khoa học, mình sẽ thử áp dụng.",
+          "date": "2025-08-08T14:20:00Z"
+        },
+        {
+          "id": "6",
+          "nickname": "charlie",
+          "message": "Bài viết truyền cảm hứng để mình tập trung hơn vào buổi sáng.",
+          "date": "2025-08-08T15:40:00Z"
+        }
+      ]
     }
   ]
 }
