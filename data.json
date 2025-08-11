@@ -87,7 +87,7 @@
     },
     {
       "title": "A Day in My Life as a Developer",
-      "content": "<p>My typical day starts early with a hot cup of coffee and a quick scan through my emails and notifications. After that, I review the to-do list I prepared the night before.</p><p>Most of my morning is dedicated to deep work—coding, fixing bugs, and implementing new features for our projects. Around noon, I take a break for lunch, often using the time to read articles or catch up on tech news. The afternoon is usually for meetings, code reviews, and brainstorming sessions with my team.</p>",
+      "content": "<p><strong><em><u>My typical day starts early with a hot cup of coffee and a quick scan through my emails and notifications. After that, I review the to-do list I prepared the night before.</u></em></strong></p><p><strong><em><u>Most of my morning is dedicated to deep work—coding, fixing bugs, and implementing new features for our projects. Around noon, I take a break for lunch, often using the time to read articles or catch up on tech news. The afternoon is usually for meetings, code reviews, and brainstorming sessions with my team.</u></em></strong></p>",
       "id": "3",
       "thumbnail": "https://picsum.photos/800/400?random=10",
       "category": "Tech Notes",

@@ -12,16 +12,15 @@ function HomePage({ currentUser, users: propUsers, setUsers: setPropUsers }) {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(true);
+
   const [editingPostId, setEditingPostId] = useState(null);
   const [editContent, setEditContent] = useState("");
   const [editTitle, setEditTitle] = useState("");
 
-  // Đồng bộ dữ liệu posts kèm avatar tác giả và avatar comment
   const syncPostsAuthorsComments = (postsData, usersData) => {
     return postsData.map(post => {
       const user = usersData.find(u => u.nickname === post.author) || {};
-
-      let updatedComments = (post.comments || []).map(comment => {
+      const updatedComments = (post.comments || []).map(comment => {
         const commentUser = usersData.find(u => u.nickname === comment.nickname) || {};
         return {
           ...comment,
@@ -39,42 +38,40 @@ function HomePage({ currentUser, users: propUsers, setUsers: setPropUsers }) {
     });
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        let usersData = propUsers;
-        if (!usersData || usersData.length === 0) {
-          const userRes = await axios.get(USER_URL);
-          usersData = userRes.data;
-          if (setPropUsers) setPropUsers(usersData);
-        }
-
-        const postRes = await axios.get(POST_URL);
-        const loggedUser = currentUser
-          ? usersData.find(u => u.id === currentUser.id)
-          : null;
-
-        let visiblePosts = postRes.data.filter(post => {
-          if (!post.isPrivate) return true;
-          return loggedUser?.isAdmin || post.author === loggedUser?.nickname;
-        });
-
-        visiblePosts = syncPostsAuthorsComments(visiblePosts, usersData);
-
-        setPosts(visiblePosts);
-        const cats = ["All", ...new Set(visiblePosts.map(p => p.category))];
-        setCategories(cats);
-
-      } catch (error) {
-        console.error('Lỗi khi tải dữ liệu:', error);
-      } finally {
-        setLoading(false);
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      let usersData = propUsers;
+      if (!usersData || usersData.length === 0) {
+        const userRes = await axios.get(USER_URL);
+        usersData = userRes.data;
+        setPropUsers?.(usersData);
       }
-    };
 
+      const postRes = await axios.get(POST_URL);
+      const loggedUser = currentUser
+        ? usersData.find(u => u.id === currentUser.id)
+        : null;
+
+      let visiblePosts = postRes.data.filter(post => {
+        if (!post.isPrivate) return true;
+        return loggedUser?.isAdmin || post.author === loggedUser?.nickname;
+      });
+
+      visiblePosts = syncPostsAuthorsComments(visiblePosts, usersData);
+
+      setPosts(visiblePosts);
+      setCategories(["All", ...new Set(visiblePosts.map(p => p.category))]);
+    } catch (error) {
+      console.error('Lỗi khi tải dữ liệu:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
-  }, [currentUser, propUsers, setPropUsers]);
+  }, [currentUser, propUsers]);
 
   const filteredPosts = selectedCategory
     ? posts.filter(p => p.category === selectedCategory)
@@ -94,9 +91,17 @@ function HomePage({ currentUser, users: propUsers, setUsers: setPropUsers }) {
 
   const handleSaveEdit = async (id) => {
     try {
-      const updatedPost = { title: editTitle, content: editContent };
+      const oldPost = posts.find(p => p.id === id);
+      if (!oldPost) return;
+
+      const updatedPost = {
+        ...oldPost, 
+        title: editTitle,
+        content: editContent
+      };
+
       await axios.put(`${POST_URL}/${id}`, updatedPost);
-      setPosts(posts.map(p => p.id === id ? { ...p, ...updatedPost } : p));
+      setPosts(posts.map(p => (p.id === id ? updatedPost : p)));
       handleCancelEdit();
     } catch (err) {
       console.error("Lỗi khi lưu bài viết:", err);
@@ -113,7 +118,9 @@ function HomePage({ currentUser, users: propUsers, setUsers: setPropUsers }) {
     }
   };
 
-  if (loading) return <p className="text-center mt-5">Đang tải...</p>;
+  if (loading) {
+    return <p className="text-center mt-5">Đang tải...</p>;
+  }
 
   return (
     <div style={{ backgroundColor: '#c9d8db', minHeight: '100vh', fontFamily: 'serif' }}>
@@ -176,11 +183,7 @@ function HomePage({ currentUser, users: propUsers, setUsers: setPropUsers }) {
                       <h2 className="h4 mt-2">{post.title}</h2>
 
                       <p className="text-muted small mb-1">
-                        {new Date(post.datePost).toLocaleDateString('vi-VN', {
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: 'numeric',
-                        })}
+                        {new Date(post.datePost).toLocaleDateString('vi-VN')}
                       </p>
 
                       <p className="text-muted small fst-italic mb-3 d-flex justify-content-between align-items-center">
@@ -232,7 +235,7 @@ function HomePage({ currentUser, users: propUsers, setUsers: setPropUsers }) {
                         users={propUsers}
                       />
                       <div className="mt-3">
-                        {post.tags && post.tags.length > 0 ? (
+                        {post.tags?.length > 0 ? (
                           post.tags.map((tag, idx) => (
                             <span
                               key={idx}
