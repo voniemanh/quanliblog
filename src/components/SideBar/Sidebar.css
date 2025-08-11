@@ -4,3 +4,8 @@
 .bg-green {
   background-color: #537375;
 }
+.sidebar-sticky {
+  position: sticky;
+  top: 80px; 
+  align-self: start; 
+}

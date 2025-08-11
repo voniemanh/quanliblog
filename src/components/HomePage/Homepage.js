@@ -240,7 +240,7 @@ function HomePage() {
             })}
           </div>
 
-          <div className="col-lg-4">
+          <div className="col-lg-4 sidebar-sticky">
             <Sidebar
               categories={categories}
               onSelectCategory={(cat) => setSelectedCategory(cat === "All" ? null : cat)}
