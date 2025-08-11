@@ -22,22 +22,38 @@ function App() {
       localStorage.removeItem('currentUser');
     }
   }, [currentUser]);
-  return(
+
+  return (
     <div className="App">
-    <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
-    <main>
-      <Routes>
-        <Route path="/" element={<Homepage/>} />
-        <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
-        <Route path="/register" element={<Register />} />
-         <Route path="/add-post" element={<AddPost currentUser={currentUser} />} />
-        <Route path='/user-list' element={<UserList/>} />
-        <Route path='/edit-profile/:id' element={<EditProfile setCurrentUser={setCurrentUser}/>} />
-      </Routes>
-    </main>
-    <footer></footer>
+      <Navbar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <main>
+        <Routes>
+          <Route 
+            path="/" 
+            element={<Homepage currentUser={currentUser} setCurrentUser={setCurrentUser} />} 
+          />
+          <Route 
+            path="/login" 
+            element={<Login setCurrentUser={setCurrentUser} />} 
+          />
+          <Route path="/register" element={<Register />} />
+          <Route 
+            path="/add-post" 
+            element={<AddPost currentUser={currentUser} />} 
+          />
+          <Route 
+            path="/user-list" 
+            element={<UserList currentUser={currentUser} setCurrentUser={setCurrentUser} />} 
+          />
+          <Route 
+            path="/edit-profile/:id" 
+            element={<EditProfile setCurrentUser={setCurrentUser} currentUser={currentUser} />} 
+          />
+        </Routes>
+      </main>
+      <footer></footer>
     </div>
-  )
+  );
 }
 
 export default App;

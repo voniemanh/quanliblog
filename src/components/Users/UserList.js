@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { USER_URL } from '../../config';
 import axios from 'axios';
+import { USER_URL, POST_URL } from '../../config';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function UserList() {
+function UserList({ currentUser, setCurrentUser }) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState({});
   const [newUser, setNewUser] = useState({ nickname: '', email: '', password: '' });
+  const [oldNickname, setOldNickname] = useState(null);
 
   const navigate = useNavigate();
 
@@ -21,8 +22,8 @@ function UserList() {
       return;
     }
 
-    const currentUser = JSON.parse(storedUser);
-    if (!currentUser.isAdmin) {
+    const currUser = JSON.parse(storedUser);
+    if (!currUser.isAdmin) {
       alert('Bạn không có quyền truy cập trang này');
       navigate('/');
       return;
@@ -54,21 +55,72 @@ function UserList() {
   const handleEditClick = (user) => {
     setEditId(user.id);
     setEditData({ nickname: user.nickname, email: user.email });
+    setOldNickname(user.nickname);
   };
 
-  const handleSaveEdit = (id) => {
-    axios.put(`${USER_URL}/${id}`, editData)
-      .then(() => {
-        fetchUsers();
-        setEditId(null);
-      })
-      .catch(err => console.error("Lỗi khi sửa người dùng:", err));
+  const handleSaveEdit = async (id) => {
+    try {
+      const userToUpdate = users.find(u => u.id === id);
+      if (!userToUpdate) return;
+      const updatedUser = { ...userToUpdate, ...editData };
+      await axios.put(`${USER_URL}/${id}`, updatedUser);
+
+      if (oldNickname && oldNickname !== editData.nickname) {
+        const postRes = await axios.get(POST_URL);
+        const posts = postRes.data;
+
+        const updatePostPromises = posts.map(async (post) => {
+          let updated = false;
+          const newPost = { ...post };
+
+          if (newPost.author === oldNickname) {
+            newPost.author = editData.nickname;
+            updated = true;
+          }
+
+          if (newPost.comments && Array.isArray(newPost.comments)) {
+            newPost.comments = newPost.comments.map(comment => {
+              if (comment.nickname === oldNickname) {
+                updated = true;
+                return { ...comment, nickname: editData.nickname };
+              }
+              return comment;
+            });
+          }
+
+          if (updated) {
+            await axios.put(`${POST_URL}/${newPost.id}`, newPost);
+          }
+        });
+
+        await Promise.all(updatePostPromises);
+      }
+
+      fetchUsers();
+      setEditId(null);
+
+      if (currentUser && currentUser.id === id) {
+        const newCurrentUser = { ...currentUser, ...editData };
+        localStorage.setItem('currentUser', JSON.stringify(newCurrentUser));
+        if (setCurrentUser) setCurrentUser(newCurrentUser);
+      }
+    } catch (err) {
+      console.error("Lỗi khi sửa người dùng:", err);
+    }
   };
 
   const handleDelete = (id) => {
     if (window.confirm("Bạn có chắc muốn xóa người dùng này?")) {
       axios.delete(`${USER_URL}/${id}`)
-        .then(fetchUsers)
+        .then(() => {
+          fetchUsers();
+
+          if (currentUser && currentUser.id === id) {
+            localStorage.removeItem('currentUser');
+            if (setCurrentUser) setCurrentUser(null);
+            navigate('/login');
+          }
+        })
         .catch(err => console.error("Lỗi khi xóa:", err));
     }
   };
@@ -90,7 +142,6 @@ function UserList() {
           </tr>
         </thead>
         <tbody>
-          {/* Hàng thêm */}
           <tr>
             <td>+</td>
             <td>
@@ -124,7 +175,6 @@ function UserList() {
             </td>
           </tr>
 
-          {/* Danh sách */}
           {users.length > 0 ? (
             users.map((user, index) => (
               <tr key={user.id}>
