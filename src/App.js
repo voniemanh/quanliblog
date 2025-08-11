@@ -1,10 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Homepage from './components/HomePage/Homepage';
-import ViewPost from './components/Posts/ViewPost';
 import AddPost from './components/Posts/AddPost';
 import UserList from './components/Users/UserList';
-import EditUser from './components/Users/EditUser';
 import Login from './components/Authen/Login';
 import Register from './components/Authen/Register';
 import Navbar from './components/NavBar/Navbar';    
@@ -26,10 +24,8 @@ function App() {
         <Route path="/" element={<Homepage/>} />
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/post-detail/:id" element={<ViewPost/>} />
-        <Route path='/add-post' element={<AddPost/>} />
-        <Route path='/user-list/:id' element={<UserList/>} />
-        <Route path='/edit-user/:id' element={<EditUser/>} />
+         <Route path="/add-post" element={<AddPost currentUser={currentUser} />} />
+        <Route path='/user-list' element={<UserList/>} />
       </Routes>
     </main>
     <footer></footer>

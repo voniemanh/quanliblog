@@ -1,11 +1,11 @@
 {
   "users": [
-    {
+    {      
       "id": "1",
       "nickname": "alice",
-      "password": "alice123",
+      "password":"alice123",
       "email": "alice@example.com",
-      "isAdmin": true
+      "isAdmin":true
     },
     {
       "id": "2",
@@ -30,7 +30,11 @@
       "author": "alice",
       "isPrivate": false,
       "category": "Introduction",
-      "tags": ["welcome", "personal", "first-post"],
+      "tags": [
+        "welcome",
+        "personal",
+        "first-post"
+      ],
       "datePost": "2025-08-01T10:00:00Z",
       "comments": [
         {
@@ -54,7 +58,13 @@
       "author": "alice",
       "isPrivate": true,
       "category": "Admin Notes",
-      "tags": ["admin", "strategy", "content-creation", "planning", "private"],
+      "tags": [
+        "admin",
+        "strategy",
+        "content-creation",
+        "planning",
+        "private"
+      ],
       "datePost": "2025-08-05T10:00:00Z",
       "comments": [
         {
@@ -78,7 +88,11 @@
       "author": "bob",
       "isPrivate": false,
       "category": "Technology",
-      "tags": ["developer-life", "productivity", "coding"],
+      "tags": [
+        "developer-life",
+        "productivity",
+        "coding"
+      ],
       "datePost": "2025-08-08T09:00:00Z",
       "comments": [
         {

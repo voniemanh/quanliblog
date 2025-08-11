@@ -4,6 +4,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 
+
 function NavBar({ currentUser, setCurrentUser }) {
   const navigate = useNavigate();
 
@@ -12,10 +13,19 @@ function NavBar({ currentUser, setCurrentUser }) {
     setCurrentUser(null);
     navigate('/login');
   };
+
   return (
     <nav className="navbar">
       <div className="left">
         <a href="/">Home</a>
+        {currentUser && (
+          <button
+            className="btn btn-success btn-sm ms-2"
+            onClick={() => navigate('/add-post')}
+          >
+            + Thêm bài viết
+          </button>
+        )}
       </div>
       <div className="right">
         {currentUser ? (
@@ -25,7 +35,7 @@ function NavBar({ currentUser, setCurrentUser }) {
           </>
         ) : (
           <div>
-            <Link to="/login">Login</Link>
+            <Link to="/login" className="me-2">Login</Link>
             <Link to="/register">Register</Link>
           </div>
         )}
