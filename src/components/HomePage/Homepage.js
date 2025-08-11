@@ -99,7 +99,7 @@ function HomePage() {
     <div style={{ backgroundColor: '#c9d8db', minHeight: '100vh', fontFamily: 'serif' }}>
       <header className="text-center py-5">
         <h1 className="display-4 fw-bold text-white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
-          Flor d’Ametler
+          Dev's Blog
         </h1>
       </header>
 
