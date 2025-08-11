@@ -9,12 +9,12 @@ function EditProfile({ currentUser, setCurrentUser }) {
 
   const [formData, setFormData] = useState({
     nickname: '',
-    password: '',
     email: '',
     authorAvatar: '',
     isAdmin: false,
   });
 
+  const [passwordInput, setPasswordInput] = useState('');
   const [avatarPreview, setAvatarPreview] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -27,7 +27,6 @@ function EditProfile({ currentUser, setCurrentUser }) {
         const { data } = await axios.get(`${USER_URL}/${id}`);
         setFormData({
           nickname: data.nickname || '',
-          password: '',
           email: data.email || '',
           authorAvatar: data.authorAvatar || '',
           isAdmin: data.isAdmin || false,
@@ -35,7 +34,6 @@ function EditProfile({ currentUser, setCurrentUser }) {
         setOldNickname(data.nickname || '');
         setAvatarPreview(data.authorAvatar || '');
       } catch (err) {
-        console.error('Lỗi khi tải thông tin người dùng:', err);
         setError('Không tải được thông tin người dùng');
       } finally {
         setLoading(false);
@@ -46,8 +44,10 @@ function EditProfile({ currentUser, setCurrentUser }) {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    const newValue = type === 'checkbox' ? checked : value;
-    setFormData((prev) => ({ ...prev, [name]: newValue }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
   };
 
   const handleAvatarChange = (e) => {
@@ -64,80 +64,71 @@ function EditProfile({ currentUser, setCurrentUser }) {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const payload = { ...formData };
-      if (!payload.password.trim()) delete payload.password;
+      const oldUser = (await axios.get(`${USER_URL}/${id}`)).data;
+      const payload = { ...oldUser, ...formData };
+      if (!passwordInput.trim()) {
+        payload.password = oldUser.password;
+      } else {
+        payload.password = passwordInput;
+      }
 
       const { data, status } = await axios.put(`${USER_URL}/${id}`, payload);
 
       if (status === 200) {
-        // Nếu nickname thay đổi thì update trong post và comment
         if (oldNickname.trim() && oldNickname.trim() !== formData.nickname.trim()) {
-          const postRes = await axios.get(POST_URL);
-          const posts = postRes.data;
-
+          const posts = (await axios.get(POST_URL)).data;
           const updatePostPromises = posts.map(async (post) => {
             let updated = false;
             const newPost = { ...post };
-
-            // Cập nhật author
             if ((newPost.author || '').trim() === oldNickname.trim()) {
               newPost.author = formData.nickname.trim();
               updated = true;
             }
-
-            // Hàm đệ quy để đổi nickname trong comments
-            const updateComments = (comments) => {
-              return comments.map(comment => {
+            const updateComments = (comments) =>
+              comments.map((comment) => {
                 let changed = false;
-                let updatedComment = { ...comment };
-
+                const updatedComment = { ...comment };
                 if ((comment.nickname || '').trim() === oldNickname.trim()) {
                   updatedComment.nickname = formData.nickname.trim();
                   changed = true;
                 }
-
                 if (Array.isArray(comment.replies) && comment.replies.length > 0) {
                   updatedComment.replies = updateComments(comment.replies);
                 }
-
                 if (changed) updated = true;
                 return updatedComment;
               });
-            };
-
             if (Array.isArray(newPost.comments) && newPost.comments.length > 0) {
               newPost.comments = updateComments(newPost.comments);
             }
-
             if (updated) {
               return axios.put(`${POST_URL}/${newPost.id}`, newPost);
             }
           });
-
           await Promise.all(updatePostPromises);
         }
-
-        // Nếu là user hiện tại -> update localStorage
         if (currentUser && String(currentUser.id) === String(id)) {
           setCurrentUser(data);
           localStorage.setItem('currentUser', JSON.stringify(data));
         }
-
         alert('Cập nhật thành công');
         navigate('/');
       } else {
         throw new Error('Phản hồi không hợp lệ');
       }
     } catch (err) {
-      console.error('Lỗi khi cập nhật:', err);
       alert('Cập nhật thất bại');
     } finally {
       setLoading(false);
     }
   };
 
-  if (loading && !formData.nickname) return <div className="text-center mt-3">Đang tải...</div>;
-  if (error) return <div className="text-danger text-center mt-3">{error}</div>;
+  if (loading && !formData.nickname) {
+    return <div className="text-center mt-3">Đang tải...</div>;
+  }
+  if (error) {
+    return <div className="text-danger text-center mt-3">{error}</div>;
+  }
 
   return (
     <div className="container mt-4" style={{ maxWidth: '500px' }}>
@@ -162,9 +153,8 @@ function EditProfile({ currentUser, setCurrentUser }) {
           type="password"
           className="form-control"
           id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
+          value={passwordInput}
+          onChange={(e) => setPasswordInput(e.target.value)}
           placeholder="••••••••"
         />
       </div>
@@ -200,7 +190,11 @@ function EditProfile({ currentUser, setCurrentUser }) {
         />
       </div>
 
-      <button onClick={handleSubmit} className="btn btn-primary w-100" disabled={loading}>
+      <button
+        onClick={handleSubmit}
+        className="btn btn-primary w-100"
+        disabled={loading}
+      >
         {loading ? 'Đang lưu...' : 'Lưu thay đổi'}
       </button>
     </div>

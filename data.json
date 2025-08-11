@@ -2,18 +2,18 @@
   "users": [
     {
       "nickname": "alice",
-      "password": "alice2025",
+      "password": "alice2222",
       "email": "alice@example.com",
       "authorAvatar": "https://picsum.photos/100/100?random=4",
       "isAdmin": true,
       "id": "1"
     },
     {
-      "nickname": "bob",
-      "email": "bob@example.com",
+      "nickname": "boby",
       "password": "bob2025",
-      "isAdmin": false,
+      "email": "bob@example.com",
       "authorAvatar": "https://picsum.photos/100/100?random=3",
+      "isAdmin": false,
       "id": "2"
     },
     {
@@ -42,7 +42,7 @@
       "comments": [
         {
           "id": "1",
-          "nickname": "bob",
+          "nickname": "boby",
           "message": "Chào mừng bạn đến với blog mới này! Mong chờ các bài viết tiếp theo.",
           "date": "2025-08-02T08:45:00Z"
         },
@@ -97,7 +97,7 @@
         "planning"
       ],
       "datePost": "2025-09-05T10:00:00Z",
-      "author": "bob",
+      "author": "boby",
       "comments": [
         {
           "id": "1754907668856",
