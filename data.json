@@ -1,20 +1,18 @@
 {
   "users": [
     {
-      "id": "1",
-      "nickname": "alice",
-      "password": "alice123",
+      "nickname": "alice1",
+      "password": "alice111",
       "email": "alice@example.com",
-      "isAdmin": true,
-      "authorAvatar": "https://picsum.photos/100/100?random=1"
+      "authorAvatar": "https://picsum.photos/100/100?random=1",
+      "id": "1"
     },
     {
-      "id": "2",
-      "nickname": "bob",
-      "password": "bobpass",
+      "nickname": "bobby",
+      "password": "bobbypass",
       "email": "bob@example.com",
-      "isAdmin": false,
-      "authorAvatar": "https://picsum.photos/100/100?random=2"
+      "authorAvatar": "https://picsum.photos/100/100?random=2",
+      "id": "2"
     },
     {
       "id": "3",
@@ -31,7 +29,7 @@
       "title": "Welcome to My Blog",
       "thumbnail": "https://picsum.photos/800/400?random=11",
       "content": "<p><em>Welcome everyone! This is the very first post on my personal blog. I created this space to share my thoughts, experiences, and ideas about technology, books, and life in general.</em></p><p><em>Over the next few weeks, I’ll be posting tutorials, reviews, and personal reflections on different topics that I find interesting. I hope that through this blog, we can start meaningful conversations and exchange ideas that can benefit all of us.</em></p><p><em>lorem</em></p>",
-      "author": "alice",
+      "authorId": "1",
       "isPrivate": false,
       "category": "Introduction",
       "tags": [
@@ -43,19 +41,19 @@
       "comments": [
         {
           "id": "1",
-          "nickname": "bob",
+          "authorId": "2",
           "message": "Chào mừng bạn đến với blog mới này! Mong chờ các bài viết tiếp theo.",
           "date": "2025-08-02T08:45:00Z"
         },
         {
           "id": "2",
-          "nickname": "charlie",
+          "authorId": "3",
           "message": "Bài viết rất hay, mong blog sẽ phát triển mạnh!",
           "date": "2025-08-02T12:15:00Z"
         },
         {
           "id": "1754881258231",
-          "nickname": "alice",
+          "authorId": "1",
           "message": "<p>hey bob</p>",
           "date": "2025-08-11T03:00:58.231Z"
         }
@@ -66,7 +64,7 @@
       "title": "Admin Only Thoughts",
       "thumbnail": "https://picsum.photos/800/400?random=12",
       "content": "<p>This post is restricted to admin users only. In this space, I’ll be sharing my behind-the-scenes thoughts on managing the blog, strategies for content creation, and insights on how to grow our community.</p><p>Since this is a private post, please keep the information here confidential. It will include draft ideas, potential collaborations, and plans for upcoming features.</p>",
-      "author": "alice",
+      "authorId": "1",
       "isPrivate": true,
       "category": "Admin Notes",
       "tags": [
@@ -80,7 +78,7 @@
       "comments": [
         {
           "id": "3",
-          "nickname": "alice",
+          "authorId": "1",
           "message": "Let's start with a Q&A section to engage readers.",
           "date": "2025-08-10T10:30:00Z"
         }
@@ -98,8 +96,15 @@
         "planning"
       ],
       "datePost": "2025-09-05T10:00:00Z",
-      "author": "bob",
-      "comments": []
+      "authorId": "2",
+      "comments": [
+        {
+          "id": "1754891288070",
+          "authorId": "2",
+          "message": "<p>hey me</p>",
+          "date": "2025-08-11T05:48:08.070Z"
+        }
+      ]
     }
   ]
 }

@@ -4,15 +4,12 @@ import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { POST_URL } from '../../config';
 
-function Comments({ post, currentUser, onUpdatePost, users }) {
+function CommentList({ post, currentUser, onUpdatePost, users }) {
   const [newComment, setNewComment] = useState('');
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editContent, setEditContent] = useState('');
 
-  const getAvatarByNickname = (nickname) => {
-    const user = users?.find(u => u.nickname === nickname);
-    return user?.authorAvatar || null;
-  };
+  const getUserById = (id) => users?.find(u => u.id === id);
 
   const handleAddComment = async () => {
     if (!currentUser) {
@@ -23,7 +20,7 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
 
     const comment = {
       id: Date.now().toString(),
-      nickname: currentUser.nickname,
+      authorId: currentUser.id,
       message: newComment,
       date: new Date().toISOString(),
     };
@@ -42,7 +39,7 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
     const comment = post.comments.find(c => c.id === id);
     if (!comment) return;
 
-    if (!currentUser || (!currentUser.isAdmin && currentUser.nickname !== comment.nickname)) {
+    if (!currentUser || (!currentUser.isAdmin && currentUser.id !== comment.authorId)) {
       alert('Bạn không có quyền xoá bình luận này.');
       return;
     }
@@ -61,7 +58,7 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
     const comment = post.comments.find(c => c.id === id);
     if (!comment) return;
 
-    if (!currentUser || (!currentUser.isAdmin && currentUser.nickname !== comment.nickname)) {
+    if (!currentUser || (!currentUser.isAdmin && currentUser.id !== comment.authorId)) {
       alert('Bạn không có quyền sửa bình luận này.');
       return;
     }
@@ -85,7 +82,9 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
       {/* Danh sách comment */}
       {post.comments && post.comments.length > 0 ? (
         post.comments.map((c) => {
-          const avatarUrl = getAvatarByNickname(c.nickname);
+          const user = getUserById(c.authorId);
+          const avatarUrl = user?.authorAvatar || null;
+          const nickname = user?.nickname || 'Unknown';
 
           return (
             <div key={c.id} className="border rounded p-2 mb-2 bg-light">
@@ -94,7 +93,7 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
                   {avatarUrl && (
                     <img
                       src={avatarUrl}
-                      alt={c.nickname}
+                      alt={nickname}
                       style={{
                         width: 30,
                         height: 30,
@@ -105,7 +104,7 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
                       }}
                     />
                   )}
-                  {c.nickname}
+                  {nickname}
                 </strong>
                 <small className="text-muted" style={{ fontSize: '0.8rem' }}>
                   {new Date(c.date).toLocaleString('vi-VN')}
@@ -142,7 +141,7 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
               )}
 
               {/* Nút sửa / xoá */}
-              {currentUser && (currentUser.isAdmin || currentUser.nickname === c.nickname) && editingCommentId !== c.id && (
+              {currentUser && (currentUser.isAdmin || currentUser.id === c.authorId) && editingCommentId !== c.id && (
                 <div className="mt-2">
                   <button
                     className="btn btn-warning btn-sm me-2"
@@ -189,4 +188,4 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
   );
 }
 
-export default Comments;
+export default CommentList;

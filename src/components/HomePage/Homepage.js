@@ -8,7 +8,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function HomePage() {
+function HomePage({currentUser}) {
   const [users, setUsers] = useState([]); 
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -18,8 +18,6 @@ function HomePage() {
   const [editContent, setEditContent] = useState("");
   const [editTitle, setEditTitle] = useState("");
   const navigate = useNavigate();
-
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +35,7 @@ function HomePage() {
 
         const visiblePosts = postRes.data.filter(post => {
           if (!post.isPrivate) return true;
-          return loggedUser?.isAdmin || post.author === loggedUser?.nickname;
+          return loggedUser?.isAdmin || post.authorId === loggedUser?.id;
         });
 
         setPosts(visiblePosts);
@@ -52,9 +50,9 @@ function HomePage() {
     };
 
     fetchData();
-  }, [navigate, currentUser]);
+  }, [navigate, currentUser?.id]);
 
-  const filteredPosts = selectedCategory
+  const filteredPosts = selectedCategory && selectedCategory !== "All"
     ? posts.filter(p => p.category === selectedCategory)
     : posts;
 
@@ -107,7 +105,7 @@ function HomePage() {
         <div className="row">
           <div className="col-lg-8">
             {filteredPosts.map((post) => {
-              const author = users.find(u => u.nickname === post.author);
+              const author = users.find(u => u.id === post.authorId);
 
               return (
                 <div className="card mb-5 shadow-sm border-0 position-relative" key={post.id}>
@@ -184,9 +182,9 @@ function HomePage() {
                                 }}
                               />
                             )}
-                            Tác giả: {post.author}
+                            Tác giả: {author ? author.nickname : 'Unknown'}
                           </span>
-                          {currentUser && (currentUser.isAdmin || currentUser.nickname === post.author) && (
+                          {currentUser && (currentUser.isAdmin || currentUser.id === post.authorId) && (
                             <span>
                               <a
                                 href="#!"
@@ -205,7 +203,6 @@ function HomePage() {
                               </a>
                             </span>
                           )}
-
                         </p>
 
                         <div dangerouslySetInnerHTML={{ __html: post.content }} />
@@ -240,7 +237,7 @@ function HomePage() {
             })}
           </div>
 
-          <div className="col-lg-4 sidebar-sticky">
+          <div className="col-lg-4">
             <Sidebar
               categories={categories}
               onSelectCategory={(cat) => setSelectedCategory(cat === "All" ? null : cat)}
