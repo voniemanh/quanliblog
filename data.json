@@ -9,7 +9,7 @@
       "id": "1"
     },
     {
-      "nickname": "bobbby",
+      "nickname": "bob",
       "email": "bob@example.com",
       "password": "bob2025",
       "isAdmin": false,
@@ -19,9 +19,8 @@
     {
       "nickname": "charlie",
       "email": "charlie@example.com",
-      "password": "charlie2025",
-      "isAdmin": false,
       "authorAvatar": "https://picsum.photos/100/100?random=3",
+      "isAdmin": false,
       "id": "3"
     }
   ],
@@ -43,7 +42,7 @@
       "comments": [
         {
           "id": "1",
-          "nickname": "bobbby",
+          "nickname": "bob",
           "message": "Chào mừng bạn đến với blog mới này! Mong chờ các bài viết tiếp theo.",
           "date": "2025-08-02T08:45:00Z"
         },
@@ -98,15 +97,24 @@
         "planning"
       ],
       "datePost": "2025-09-05T10:00:00Z",
-      "author": "bobbby",
+      "author": "bob",
       "comments": [
         {
           "id": "1754907668856",
           "nickname": "charlie",
           "message": "<p>ewerewr</p>",
-          "date": "2025-08-11T10:21:08.856Z"
+          "date": "2025-08-11T10:21:08.856Z",
+          "authorAvatar": "https://picsum.photos/100/100?random=3"
+        },
+        {
+          "id": "1754917061255",
+          "nickname": "alice",
+          "message": "<p>weewr</p>",
+          "date": "2025-08-11T12:57:41.255Z",
+          "authorAvatar": "https://picsum.photos/100/100?random=4"
         }
-      ]
+      ],
+      "authorAvatar": "https://picsum.photos/100/100?random=3"
     }
   ]
 }
