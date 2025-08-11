@@ -2,6 +2,7 @@
   "users": [
     {
       "nickname": "alice",
+      "password": "alice2025",
       "email": "alice@example.com",
       "authorAvatar": "https://picsum.photos/100/100?random=4",
       "isAdmin": true,
@@ -104,28 +105,6 @@
           "nickname": "charlie",
           "message": "<p>ewerewr</p>",
           "date": "2025-08-11T10:21:08.856Z"
-        }
-      ]
-    },
-    {
-      "id": "eedd",
-      "title": "hggh",
-      "content": "<p>fdsfdsf</p>",
-      "author": "alice",
-      "datePost": "2025-08-11T12:41:36.000Z",
-      "isPrivate": false,
-      "category": "dfssdfs",
-      "tags": [
-        "sdsdfs"
-      ],
-      "authorAvatar": "https://picsum.photos/100/100?random=4",
-      "comments": [
-        {
-          "id": "1754916102907",
-          "nickname": "alice",
-          "message": "<p>fsdfsdfs</p>",
-          "date": "2025-08-11T12:41:42.907Z",
-          "authorAvatar": "https://picsum.photos/100/100?random=4"
         }
       ]
     }
