@@ -1,31 +1,40 @@
 {
   "users": [
-    {      
+    {
       "id": "1",
       "nickname": "alice",
-      "password":"alice123",
+      "password": "alice123",
       "email": "alice@example.com",
-      "isAdmin":true
+      "isAdmin": true,
+      "authorAvatar": "https://picsum.photos/100/100?random=1"
     },
     {
       "id": "2",
       "nickname": "bob",
       "password": "bobpass",
       "email": "bob@example.com",
-      "isAdmin": false
+      "isAdmin": false,
+      "authorAvatar": "https://picsum.photos/100/100?random=2"
     },
     {
       "id": "3",
       "nickname": "charlie",
       "password": "charlie2025",
       "email": "charlie@example.com",
-      "isAdmin": false
+      "isAdmin": false,
+      "authorAvatar": "https://picsum.photos/100/100?random=3"
+    },
+    {
+      "id": "e623",
+      "nickname": "papa",
+      "password": "papapapa"
     }
   ],
   "posts": [
     {
       "id": "1",
       "title": "Welcome to My Blog",
+      "thumbnail": "https://picsum.photos/800/400?random=11",
       "content": "<p><em>Welcome everyone! This is the very first post on my personal blog. I created this space to share my thoughts, experiences, and ideas about technology, books, and life in general.</em></p><p><em>Over the next few weeks, I’ll be posting tutorials, reviews, and personal reflections on different topics that I find interesting. I hope that through this blog, we can start meaningful conversations and exchange ideas that can benefit all of us.</em></p><p><em>lorem</em></p>",
       "author": "alice",
       "isPrivate": false,
@@ -48,12 +57,25 @@
           "nickname": "charlie",
           "message": "Bài viết rất hay, mong blog sẽ phát triển mạnh!",
           "date": "2025-08-02T12:15:00Z"
+        },
+        {
+          "id": "1754881258231",
+          "nickname": "alice",
+          "message": "<p>hey bob</p>",
+          "date": "2025-08-11T03:00:58.231Z"
+        },
+        {
+          "id": "1754883398953",
+          "nickname": "papa",
+          "message": "<p>papapapa🤪</p><p><strong>bold</strong></p><p><em>italic</em></p><p><u>underline</u></p>",
+          "date": "2025-08-11T03:36:38.953Z"
         }
       ]
     },
     {
       "id": "2",
       "title": "Admin Only Thoughts",
+      "thumbnail": "https://picsum.photos/800/400?random=12",
       "content": "<p>This post is restricted to admin users only. In this space, I’ll be sharing my behind-the-scenes thoughts on managing the blog, strategies for content creation, and insights on how to grow our community.</p><p>Since this is a private post, please keep the information here confidential. It will include draft ideas, potential collaborations, and plans for upcoming features.</p>",
       "author": "alice",
       "isPrivate": true,
@@ -72,18 +94,13 @@
           "nickname": "alice",
           "message": "Let's start with a Q&A section to engage readers.",
           "date": "2025-08-10T10:30:00Z"
-        },
-        {
-          "id": "4",
-          "nickname": "alice",
-          "message": "Cần thêm lịch đăng bài cố định hàng tuần.",
-          "date": "2025-08-10T11:00:00Z"
         }
       ]
     },
     {
       "id": "3",
       "title": "A Day in My Life as a Developer",
+      "thumbnail": "https://picsum.photos/800/400?random=13",
       "content": "<p>My typical day starts early with a hot cup of coffee and a quick scan through my emails and notifications. After that, I review the to-do list I prepared the night before.</p><p>Most of my morning is dedicated to deep work—coding, fixing bugs, and implementing new features for our projects. Around noon, I take a break for lunch, often using the time to read articles or catch up on tech news. The afternoon is usually for meetings, code reviews, and brainstorming sessions with my team.</p>",
       "author": "bob",
       "isPrivate": false,
