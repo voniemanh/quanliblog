@@ -25,9 +25,9 @@
       "authorAvatar": "https://picsum.photos/100/100?random=3"
     },
     {
-      "id": "e623",
-      "nickname": "papa",
-      "password": "papapapa"
+      "id": "4",
+      "nickname": "panda",
+      "password": "papandaa"
     }
   ],
   "posts": [
@@ -63,12 +63,6 @@
           "nickname": "alice",
           "message": "<p>hey bob</p>",
           "date": "2025-08-11T03:00:58.231Z"
-        },
-        {
-          "id": "1754883398953",
-          "nickname": "papa",
-          "message": "<p>papapapa🤪</p><p><strong>bold</strong></p><p><em>italic</em></p><p><u>underline</u></p>",
-          "date": "2025-08-11T03:36:38.953Z"
         }
       ]
     },
@@ -98,33 +92,19 @@
       ]
     },
     {
-      "id": "3",
       "title": "A Day in My Life as a Developer",
-      "thumbnail": "https://picsum.photos/800/400?random=13",
       "content": "<p>My typical day starts early with a hot cup of coffee and a quick scan through my emails and notifications. After that, I review the to-do list I prepared the night before.</p><p>Most of my morning is dedicated to deep work—coding, fixing bugs, and implementing new features for our projects. Around noon, I take a break for lunch, often using the time to read articles or catch up on tech news. The afternoon is usually for meetings, code reviews, and brainstorming sessions with my team.</p>",
-      "author": "bob",
-      "isPrivate": false,
-      "category": "Technology",
+      "id": "3",
+      "thumbnail": "https://picsum.photos/800/400?random=10",
+      "category": "Tech Notes",
       "tags": [
-        "developer-life",
-        "productivity",
-        "coding"
+        "strategy",
+        "content-creation",
+        "planning"
       ],
-      "datePost": "2025-08-08T09:00:00Z",
-      "comments": [
-        {
-          "id": "5",
-          "nickname": "alice",
-          "message": "Lịch làm việc rất khoa học, mình sẽ thử áp dụng.",
-          "date": "2025-08-08T14:20:00Z"
-        },
-        {
-          "id": "6",
-          "nickname": "charlie",
-          "message": "Bài viết truyền cảm hứng để mình tập trung hơn vào buổi sáng.",
-          "date": "2025-08-08T15:40:00Z"
-        }
-      ]
+      "datePost": "2025-09-05T10:00:00Z",
+      "author": "bob",
+      "comments": []
     }
   ]
 }

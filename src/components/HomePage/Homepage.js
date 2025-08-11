@@ -116,7 +116,7 @@ function HomePage() {
                       <img
                         src={post.thumbnail}
                         alt="Thumbnail"
-                        style={{ width: '100%', height: 'auto', marginBottom: '1rem', borderRadius: '5px' }}
+                        style={{ width: '100%', height: 'auto', marginBottom: '1rem'}}
                       />
                     )}
 
@@ -167,23 +167,47 @@ function HomePage() {
                             year: 'numeric',
                           })}
                         </p>
-                        <p className="text-muted small fst-italic mb-3">
-                        {author && author.authorAvatar && (
-                            <img
-                              src={author.authorAvatar}
-                              alt={author.nickname}
-                              style={{
-                                width: 30,
-                                height: 30,
-                                borderRadius: '50%',
-                                objectFit: 'cover',
-                                marginRight: '10px',
-                                border: '2px solid #ddd'
-                              }}
-                            />
+
+                        <p className="text-muted small fst-italic mb-3 d-flex justify-content-between align-items-center">
+                          <span style={{ display: 'flex', alignItems: 'center' }}>
+                            {author && author.authorAvatar && (
+                              <img
+                                src={author.authorAvatar}
+                                alt={author.nickname}
+                                style={{
+                                  width: 30,
+                                  height: 30,
+                                  borderRadius: '50%',
+                                  objectFit: 'cover',
+                                  marginRight: '10px',
+                                  border: '2px solid #ddd'
+                                }}
+                              />
+                            )}
+                            Tác giả: {post.author}
+                          </span>
+                          {currentUser && (currentUser.isAdmin || currentUser.nickname === post.author) && (
+                            <span>
+                              <a
+                                href="#!"
+                                onClick={() => handleEditClick(post)}
+                                style={{ cursor: 'pointer', marginRight: '10px', textDecoration: 'underline', color: '#0d6efd' }}
+                              >
+                                Sửa
+                              </a>
+                              |
+                              <a
+                                href="#!"
+                                onClick={() => handleDelete(post.id)}
+                                style={{ cursor: 'pointer', marginLeft: '10px', color: 'red', textDecoration: 'underline' }}
+                              >
+                                Xoá
+                              </a>
+                            </span>
                           )}
-                          Tác giả: {post.author} 
+
                         </p>
+
                         <div dangerouslySetInnerHTML={{ __html: post.content }} />
                         <Comments
                           post={post}
@@ -208,24 +232,6 @@ function HomePage() {
                             <span className="text-muted">No tags</span>
                           )}
                         </div>
-
-                        {/* CHỈ HIỂN THỊ NÚT SỬA XOÁ KHI NGƯỜI ĐĂNG NHẬP LÀ AUTHOR */}
-                        {currentUser && currentUser.nickname === post.author && (
-                          <div className="mt-3">
-                            <button
-                              className="btn btn-warning btn-sm me-2"
-                              onClick={() => handleEditClick(post)}
-                            >
-                              Sửa
-                            </button>
-                            <button
-                              className="btn btn-danger btn-sm"
-                              onClick={() => handleDelete(post.id)}
-                            >
-                              Xoá
-                            </button>
-                          </div>
-                        )}
                       </>
                     )}
                   </div>

@@ -39,7 +39,16 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
   };
 
   const handleDeleteComment = async (id) => {
+    const comment = post.comments.find(c => c.id === id);
+    if (!comment) return;
+
+    if (!currentUser || (!currentUser.isAdmin && currentUser.nickname !== comment.nickname)) {
+      alert('Bạn không có quyền xoá bình luận này.');
+      return;
+    }
+
     if (!window.confirm('Xoá comment này?')) return;
+
     const updatedPost = {
       ...post,
       comments: post.comments.filter(c => c.id !== id),
@@ -49,6 +58,14 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
   };
 
   const handleSaveEdit = async (id) => {
+    const comment = post.comments.find(c => c.id === id);
+    if (!comment) return;
+
+    if (!currentUser || (!currentUser.isAdmin && currentUser.nickname !== comment.nickname)) {
+      alert('Bạn không có quyền sửa bình luận này.');
+      return;
+    }
+
     const updatedPost = {
       ...post,
       comments: post.comments.map(c =>
@@ -125,7 +142,7 @@ function Comments({ post, currentUser, onUpdatePost, users }) {
               )}
 
               {/* Nút sửa / xoá */}
-              {currentUser && currentUser.nickname === c.nickname && editingCommentId !== c.id && (
+              {currentUser && (currentUser.isAdmin || currentUser.nickname === c.nickname) && editingCommentId !== c.id && (
                 <div className="mt-2">
                   <button
                     className="btn btn-warning btn-sm me-2"
